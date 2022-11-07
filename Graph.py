@@ -11,7 +11,6 @@ class Graph:
     def removeEdge(self, start, end):
         for i in self.Graph:
             if i == start:
-
                 print(self.Graph[start])
 
     def TestPrint(self):
