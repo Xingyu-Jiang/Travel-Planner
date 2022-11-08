@@ -11,7 +11,10 @@ class Graph:
     def removeEdge(self, start, end):
         for i in self.Graph:
             if i == start:
-                print(self.Graph[i])
+                print(self.Graph[start])
+    def viewvertex(self):
+        for vertex in Graph:
+            print(vertex)
 
     def TestPrint(self):
         print(self.Graph)
@@ -24,5 +27,5 @@ if __name__ == "__main__":
     a.addVertex("Hi")
     a.addEdge("Joe", "Yo", 15, 13)
     a.addEdge("Joe", "Hi", 36, 80)
-    a.removeEdge("Joe", "Yo")
-    # a.TestPrint()
+    # a.removeEdge("Joe","Yo")
+    a.TestPrint()
