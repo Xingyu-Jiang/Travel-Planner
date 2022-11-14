@@ -18,11 +18,11 @@ class Graph:
     def viewVertex(self):
         for vertex in self.Graph.keys():
             print(vertex)
+            
     def viewEdge(self,target):
         for vertex in self.Graph.keys():
             if vertex == target:
                 print(self.Graph[vertex])
-
 
     def TestPrint(self):
         print(self.Graph)
@@ -38,3 +38,4 @@ if __name__ == "__main__":
     a.TestPrint()
     a.removeEdge("China","US",2000,150)
     a.TestPrint()
+
