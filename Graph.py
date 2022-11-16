@@ -12,9 +12,15 @@ class Graph:
         for i in self.Graph:
             if i == start:
                 print(self.Graph[start])
-    def viewvertex(self):
-        for vertex in Graph:
-            print(vertex)
+
+    def viewVertex(self,target):
+        for vertex in self.Graph:
+            print(self.Graph[vertex])
+            if self.Graph[vertex].key() == target:
+                print(self.Graph[vertex])
+        """for vertex in self.Graph:
+            if self.Graph[vertex] == target:
+                print(self.Graph[vertex].value())"""
 
     def TestPrint(self):
         print(self.Graph)
@@ -28,4 +34,5 @@ if __name__ == "__main__":
     a.addEdge("Joe", "Yo", 15, 13)
     a.addEdge("Joe", "Hi", 36, 80)
     # a.removeEdge("Joe","Yo")
-    a.TestPrint()
+    # a.TestPrint()
+    a.viewVertex("Joe")
