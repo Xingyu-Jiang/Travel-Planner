@@ -29,7 +29,10 @@ class Graph:
                 print(self.Graph[vertex])
 
     def TestPrint(self):
-        print(self.Graph)
+        for keys, values in self.Graph.items():
+            print(keys,values)
+
+
 
     def find_all_paths(self, start_vertex, end_vertex, path=[]):
       path = path + [start_vertex]
@@ -94,17 +97,12 @@ if __name__ == "__main__":
     a.addVertex("Russia")
     a.addVertex("US")
     a.addEdge("China", "US", 2000, 150)
-    a.addEdge("US", "Russia", 800, 80)
     a.addEdge("China", "meowcity", 800, 80)
-    a.addEdge("CatCity", "China", 100000, 100000)
+    a.addEdge("US", "Russia", 800, 80)
     a.addEdge("US", "DogCity", 10,10)
+    a.addEdge("CatCity", "China", 100000, 100000)
     a.addEdge("DogCity", "Russia", 10, 20)
     a.TestPrint()
-    # print(a.Graph["China"])
-    # a.removeEdge("China","US",2000,150)
-    # a.TestPrint()
-    # print(a.Graph["China"])
-    # print(a.Graph["China"])
-    print(a.find_all_paths('China','Russia'))
-    print(a.CheapestValue('China','Russia'))
-    print(a.shortestroute('China','Russia'))
+    b = a.find_all_paths("CatCity","China")
+    print(b)
+
