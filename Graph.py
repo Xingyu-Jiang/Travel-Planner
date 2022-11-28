@@ -32,7 +32,9 @@ class Graph:
         for keys, values in self.Graph.items():
             print(keys, values)
 
-    def find_all_paths(self, start_vertex, end_vertex, path=[]):
+    def find_all_paths(self, start_vertex, end_vertex, path=None):
+        if path is None:
+            path = []
         path = path + [start_vertex]
         if start_vertex == end_vertex:
             return [path]
@@ -45,7 +47,7 @@ class Graph:
         if start_vertex not in vertex:
             return []
 
-        # If the start verex is in graph
+        # If the start vertex is in graph
         paths = []
         for vertex in self.Graph[start_vertex]:
             if vertex[0] not in path:
@@ -56,11 +58,11 @@ class Graph:
         return paths
 
     def routeCost(self, start, end):
-        totalcost = 0
+        totalCost = 0
         for route in self.Graph[start]:
             if route[0] == end:
-                totalcost = totalcost + route[2]
-        return totalcost
+                totalCost = totalCost + route[2]
+        return totalCost
 
     def distancecost(self, start, end):
         totalCost = 0
@@ -102,5 +104,4 @@ if __name__ == "__main__":
     a.addEdge("CatCity", "China", 100000, 100000)
     a.addEdge("DogCity", "Russia", 10, 20)
     a.TestPrint()
-    b = a.find_all_paths("CatCity", "China")
-    print(b)
+
