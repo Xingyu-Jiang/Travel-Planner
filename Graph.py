@@ -127,13 +127,14 @@ if __name__ == "__main__":
     a.addVertex("China")
     a.addVertex("Russia")
     a.addVertex("US")
-    a.addEdge("China", "US", 2000, 150)
-    a.addEdge("China", "meowcity", 800, 80)
+    a.addEdge("China", "US", 2000, 400)
+    a.addEdge("China", "Italy", 800, 80)
     a.addEdge("US", "Russia", 800, 80)
-    a.addEdge("US", "DogCity", 10, 10)
-    a.addEdge("CatCity", "China", 100000, 100000)
-    a.addEdge("DogCity", "Russia", 10, 20)
+    a.addEdge("US", "Japan", 10, 10)
+    a.addEdge("Germany", "China", 100, 1000)
+    a.addEdge("Japan", "Russia", 10, 20)
+    a.addEdge("Japan", "Canada", 1000, 200)
+
     a.TestPrint()
-    print("--------")
-    print(a.ShortestRoute("China", "meowcity"))
-    print(a.Distance("China", "meowcity"))
+
+
