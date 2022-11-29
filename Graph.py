@@ -42,7 +42,7 @@ class Graph:
             print(keys, values)
 
     def find_all_paths(self, start_vertex, end_vertex, path=None):
-        if a.__contains__(start_vertex) & a.__contains__(end_vertex):
+        if self.__contains__(start_vertex) & self.__contains__(end_vertex):
             if path is None:
                 path = []
             path = path + [start_vertex]
@@ -70,7 +70,7 @@ class Graph:
         return paths
 
     def Distance(self, start, end):
-        if a.__contains__(start) & a.__contains__(end):
+        if self.__contains__(start) & self.__contains__(end):
             totalCost = 0
             for route in self.Graph[start]:  # Find route
                 if route[0] == end:
@@ -80,7 +80,7 @@ class Graph:
             raise Exception("Start and/or vertex does not exist in the graph")
 
     def routeCost(self, start, end):
-        if a.__contains__(start) & a.__contains__(end):
+        if self.__contains__(start) & self.__contains__(end):
             totalCost = 0
             for route in self.Graph[start]:
                 if route[0] == end:
@@ -90,32 +90,34 @@ class Graph:
             raise Exception("Start and/or vertex does not exist in the graph")
 
     def ShortestRoute(self, start, end):
-        if a.__contains__(start) & a.__contains__(end):
-            allpath = self.find_all_paths(start, end)
+        if self.__contains__(start) & self.__contains__(end):
+            allPaths = self.find_all_paths(start, end)
             res = []
-            for path in allpath:
+            for path in allPaths:
                 pathCost = 0
                 for i in range(len(path) - 1):
                     pathCost = pathCost + self.Distance(path[i], path[i + 1])
                 res.append(pathCost)
             if len(res) != 0:
-                return allpath[res.index(min(res))], min(res)
+                return "From {0} to {1} with shortest distance {2}. Total distance {3} miles".format(
+                    start, end, allPaths[res.index(min(res))], min(res))
             else:
                 raise Exception("Route does not exist")
         else:
             raise Exception("Start and/or end vertex does not exist in the graph")
 
     def CheapestRoute(self, start, end):
-        if a.__contains__(start) & a.__contains__(end):
-            allpath = self.find_all_paths(start, end)
+        if self.__contains__(start) & self.__contains__(end):
+            allPaths = self.find_all_paths(start, end)
             res = []
-            for path in allpath:
+            for path in allPaths:
                 pathCost = 0
                 for i in range(len(path) - 1):
                     pathCost = pathCost + self.routeCost(path[i], path[i + 1])
                 res.append(pathCost)
             if len(res) != 0:
-                return allpath[res.index(min(res))], min(res)
+                return "From {0} to {1} with lowest cost {2}. Total cost {3} dollars".format(
+                    start, end, allPaths[res.index(min(res))], min(res))
             else:
                 raise Exception("Route does not exist")
         else:
@@ -132,9 +134,9 @@ if __name__ == "__main__":
     a.addEdge("US", "Russia", 800, 80)
     a.addEdge("US", "Japan", 10, 10)
     a.addEdge("Germany", "China", 100, 1000)
-    a.addEdge("Japan", "Russia", 10, 20)
+    a.addEdge("Japan", "Russia", 100, 250)
     a.addEdge("Japan", "Canada", 1000, 200)
 
-    a.TestPrint()
-
-
+    print(a.ShortestRoute("China", "Japan"))
+    print("----")
+    print(a.CheapestRoute("China", "Japan"))
