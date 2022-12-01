@@ -29,6 +29,12 @@ class Graph:
         for vertex in self.Graph.keys():  # Print all vertices
             print(vertex)
 
+    def generatevertexlist(self):
+        list = ['Selected']
+        for vertex in self.Graph.keys():
+            list.append(vertex)
+        return list
+
     def viewEdges(self, target):
         for vertex in self.Graph.keys():  # Search for the target vertex
             if vertex == target:
@@ -94,13 +100,15 @@ class Graph:
             allPaths = self.find_all_paths(start, end)
             res = []
             for path in allPaths:
-                pathCost = 0
+                pathDistance = 0
                 for i in range(len(path) - 1):
-                    pathCost = pathCost + self.Distance(path[i], path[i + 1])
-                res.append(pathCost)
+                    pathDistance = pathDistance + self.Distance(path[i], path[i + 1])
+                res.append(pathDistance)
+
             if len(res) != 0:
-                return "From {0} to {1} with shortest distance {2}. Total distance {3} miles".format(
-                    start, end, allPaths[res.index(min(res))], min(res))
+                return " Total distance {1} miles. Route: {0}".format(
+                    str(allPaths[res.index(min(res))]).replace('[', '')
+                    .replace(']', '').replace("'", '').replace(',', '→'), min(res))
             else:
                 raise Exception("Route does not exist")
         else:
@@ -116,8 +124,9 @@ class Graph:
                     pathCost = pathCost + self.routeCost(path[i], path[i + 1])
                 res.append(pathCost)
             if len(res) != 0:
-                return "From {0} to {1} with lowest cost {2}. Total cost {3} dollars".format(
-                    start, end, allPaths[res.index(min(res))], min(res))
+                return " Total cost {1} dollars. Route: {0}".format(
+                    str(allPaths[res.index(min(res))]).replace('[', '')
+                    .replace(']', '').replace("'", '').replace(',', '→'), min(res))
             else:
                 raise Exception("Route does not exist")
         else:
@@ -136,7 +145,3 @@ if __name__ == "__main__":
     a.addEdge("Germany", "China", 100, 1000)
     a.addEdge("Japan", "Russia", 100, 250)
     a.addEdge("Japan", "Canada", 1000, 200)
-
-    print(a.ShortestRoute("China", "Japan"))
-    print("----")
-    print(a.CheapestRoute("China", "Japan"))
