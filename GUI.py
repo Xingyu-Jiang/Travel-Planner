@@ -44,8 +44,8 @@ def btnClickFunction():
 
 
 root = Tk()
-frame = Frame(root)
-frame.pack()
+root.eval('tk::PlaceWindow . center')
+root.resizable(False, False)
 
 # This is the section of code which creates the main window
 root.geometry('435x250')
