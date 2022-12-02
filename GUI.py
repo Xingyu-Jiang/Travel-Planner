@@ -23,66 +23,53 @@ def getSelectedComboItemStart():
     return StartCity.get()
 
 
-# this is a function which returns the selected combo box item
 def getSelectedComboItemEnd():
     return EndCity.get()
 
 
-"""# this is a function to get the user input from the text input box
-def getInputBoxValue():
-    userInput = tInput.get()
-    return userInput"""
-
-
-# this is the function called when the button is clicked
+# When the button is clicked
 def btnClickFunction():
     if getSelectedComboItemStart() != 'Selected' or getSelectedComboItemEnd() != 'Selected':
-        #print(a.ShortestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd()))
         ShortestOutput["text"] = a.ShortestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
         CheapOutput["text"] = a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
         print('clicked')
 
 
+# Main window configuration
 root = Tk()
 root.eval('tk::PlaceWindow . center')
-root.resizable(False, False)
-
-# This is the section of code which creates the main window
-root.geometry('435x250')
+root.geometry('615x240')
 root.configure(background='#F0F8FF')
 root.title('Travel Planner')
 
-# This is the section of code which creates a combo box
+# root.resizable(False, False)
 
-StartCity = ttk.Combobox(root, values=a.generatevertexlist(), font=('arial', 12, 'normal'), width=10)
-StartCity.place(x=20, y=30)
+# Select start and end
+StartCity = ttk.Combobox(root, values=a.generatevertexlist(), font=('arial', 12, 'normal'), width=15)
+StartCity.grid(column=0, row=0, sticky=tk.W, padx=20, pady=20)
 StartCity.current(0)
 
-EndCity = ttk.Combobox(root, values=a.generatevertexlist(), font=('arial', 12, 'normal'), width=10)
-EndCity.place(x=175, y=30)
+EndCity = ttk.Combobox(root, values=a.generatevertexlist(), font=('arial', 12, 'normal'), width=15)
+EndCity.grid(column=2, row=0, sticky=tk.W, padx=20, pady=20)
 EndCity.current(0)
 
-# This is the section of code which creates a label
-Label(root, text='→', bg='#F0F8FF', font=('arial', 22, 'normal')).place(x=135, y=20)
-
-Label(root, text='Shortest Route', bg='#F0F8FF', font=('arial', 12, 'normal')).place(x=20, y=80)
-
-Label(root, text='Cheapest Route', bg='#F0F8FF', font=('arial', 12, 'normal')).place(x=20, y=130)
-
-# Cheapest
-CheapOutput = Label(root, text='', bg='#F0F8FF', font=('arial', 12, 'normal'))
+# Legend
+Label(root, text='→', bg='#F0F8FF', font=('arial', 22, 'normal')).grid(column=1, row=0, padx=25, pady=10)
+Label(root, text='Shortest Route', bg='#F0F8FF', font=('arial', 12, 'normal')). \
+    grid(column=0, row=1, sticky=tk.W, padx=20, pady=20)
+Label(root, text='Cheapest Route', bg='#F0F8FF', font=('arial', 12, 'normal')). \
+    grid(column=0, row=2, sticky=tk.W, padx=20, pady=20)
 
 
+# Shortest path output
 ShortestOutput = Label(root, text='', bg='#F0F8FF', font=('arial', 12, 'normal'))
+ShortestOutput.grid(column=1, row=1, columnspan=4, padx=20, pady=20)
 
-"""# This is the section of code which creates a text input box
-tInput = Entry(root)
-tInput.place(x=166, y=9)"""
+# Cheapest path output
+CheapOutput = Label(root, text='', bg='#F0F8FF', font=('arial', 12, 'normal'))
+CheapOutput.grid(column=1, row=2, columnspan=4, padx=20, pady=20)
 
-# This is the section of code which creates a button
-Button(root, text='Search Route', bg='#F0F8FF', font=('arial', 12, 'normal'), command=btnClickFunction).place(x=305,
-                                                                                                              y=25)
-ShortestOutput.place(x=175, y=80)
-CheapOutput.place(x=175, y=130)
-
+# Search button
+Search = Button(root, text='Search Route', bg='#F0F8FF', font=('arial', 12, 'normal'), command=btnClickFunction)
+Search.grid(column=3, row=0, padx=5, pady=5)
 root.mainloop()
