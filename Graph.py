@@ -144,7 +144,7 @@ class Graph:
                 # Print
                 path = str(CheapestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', '→')
 
-                return " Total cost {0} dollars. Total distance {1} miles. \nRoute: {2}".format(
+                return " Total distance {1} miles. Total cost {0} dollars. \nRoute: {2}".format(
                     TotalCost, TotalDistance, path)
             else:
                 raise Exception("Route does not exist")
