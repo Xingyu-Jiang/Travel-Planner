@@ -75,7 +75,7 @@ class Graph:
 
         return paths
 
-    def Distance(self, start, end):
+    def CalcDistance(self, start, end):
         if self.__contains__(start) & self.__contains__(end):
             totalCost = 0
             for route in self.Graph[start]:  # Find route
@@ -97,18 +97,27 @@ class Graph:
 
     def ShortestRoute(self, start, end):
         if self.__contains__(start) & self.__contains__(end):
+            # Find path with the shortest distance
             allPaths = self.find_all_paths(start, end)
             res = []
             for path in allPaths:
                 pathDistance = 0
                 for i in range(len(path) - 1):
-                    pathDistance = pathDistance + self.Distance(path[i], path[i + 1])
+                    pathDistance = pathDistance + self.CalcDistance(path[i], path[i + 1])
                 res.append(pathDistance)
 
             if len(res) != 0:
-                return " Total distance {1} miles. Route: {0}".format(
-                    str(allPaths[res.index(min(res))]).replace('[', '')
-                    .replace(']', '').replace("'", '').replace(',', '→'), min(res))
+                TotalDistance = min(res)
+                ShortestRoutePath = allPaths[res.index(TotalDistance)]
+                # Cost
+                cost = 0
+                for i in range(len(ShortestRoutePath) - 1):
+                    cost = cost + self.routeCost(ShortestRoutePath[i], ShortestRoutePath[i + 1])
+                # Print
+                path = str(ShortestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', '→')
+
+                return " Total distance {0} miles. Total cost {1} dollars. \nRoute: {2}. ".format(
+                    TotalDistance, cost, path)
             else:
                 raise Exception("Route does not exist")
         else:
@@ -116,6 +125,7 @@ class Graph:
 
     def CheapestRoute(self, start, end):
         if self.__contains__(start) & self.__contains__(end):
+            # Find path with the cheapest cost
             allPaths = self.find_all_paths(start, end)
             res = []
             for path in allPaths:
@@ -123,10 +133,19 @@ class Graph:
                 for i in range(len(path) - 1):
                     pathCost = pathCost + self.routeCost(path[i], path[i + 1])
                 res.append(pathCost)
+
             if len(res) != 0:
-                return " Total cost {1} dollars. Route: {0}".format(
-                    str(allPaths[res.index(min(res))]).replace('[', '')
-                    .replace(']', '').replace("'", '').replace(',', '→'), min(res))
+                TotalCost = min(res)
+                CheapestRoutePath = allPaths[res.index(TotalCost)]
+                # Distance
+                TotalDistance = 0
+                for i in range(len(CheapestRoutePath) - 1):
+                    TotalDistance = TotalDistance + self.CalcDistance(CheapestRoutePath[i], CheapestRoutePath[i + 1])
+                # Print
+                path = str(CheapestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', '→')
+
+                return " Total distance {1} miles. Total cost {0} dollars. \nRoute: {2}".format(
+                    TotalCost, TotalDistance, path)
             else:
                 raise Exception("Route does not exist")
         else:
@@ -145,3 +164,5 @@ if __name__ == "__main__":
     a.addEdge("Germany", "China", 100, 1000)
     a.addEdge("Japan", "Russia", 100, 250)
     a.addEdge("Japan", "Canada", 1000, 200)
+
+    print(a.ShortestRoute("US", "Italy"))
