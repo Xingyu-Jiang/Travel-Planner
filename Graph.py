@@ -29,8 +29,14 @@ class Graph:
         for vertex in self.Graph.keys():  # Print all vertices
             print(vertex)
 
-    def generatevertexlist(self):
-        list = ['Selected']
+    def StartGenerateVertexList(self):
+        list = ['From']
+        for vertex in self.Graph.keys():
+            list.append(vertex)
+        return list
+
+    def EndGenerateVertexList(self):
+        list = ['To']
         for vertex in self.Graph.keys():
             list.append(vertex)
         return list
@@ -119,7 +125,7 @@ class Graph:
                 return " Total distance {0} miles. Total cost {1} dollars. \nRoute: {2}. ".format(
                     TotalDistance, cost, path)
             else:
-                raise Exception("Route does not exist")
+                return False
         else:
             raise Exception("Start and/or end vertex does not exist in the graph")
 
@@ -147,7 +153,7 @@ class Graph:
                 return " Total distance {1} miles. Total cost {0} dollars. \nRoute: {2}".format(
                     TotalCost, TotalDistance, path)
             else:
-                raise Exception("Route does not exist")
+                return False
         else:
             raise Exception("Start and/or end vertex does not exist in the graph")
 
@@ -157,6 +163,7 @@ if __name__ == "__main__":
     a.addVertex("China")
     a.addVertex("Russia")
     a.addVertex("US")
+    a.addVertex("NoWhere")
     a.addEdge("China", "US", 2000, 400)
     a.addEdge("China", "Italy", 800, 80)
     a.addEdge("US", "Russia", 800, 80)
@@ -165,4 +172,11 @@ if __name__ == "__main__":
     a.addEdge("Japan", "Russia", 100, 250)
     a.addEdge("Japan", "Canada", 1000, 200)
 
-    print(a.ShortestRoute("US", "Italy"))
+    # print(a.ShortestRoute("US", "Italy"))
+
+    # print(a.find_all_paths("US", "Canada"))
+    print(a.find_path("Germany", "China"))
+    print(a.find_path("Germany", "NoWhere"))
+    print(a.find_path("US", "Japan"))
+
+
