@@ -29,11 +29,20 @@ def getSelectedComboItemEnd():
 
 # When the button is clicked
 def btnClickFunction():
-    if getSelectedComboItemStart() != 'Selected' or getSelectedComboItemEnd() != 'Selected':
-        ShortestOutput["text"] = a.ShortestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
-        CheapOutput["text"] = a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
-        print('clicked')
+    if getSelectedComboItemStart() != 'From' or getSelectedComboItemEnd() != 'To':
+        if a.ShortestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd()):
+            ShortestOutput["text"] = a.ShortestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
+        else:
+            ShortestOutput["text"] = "Currently, no routes available from {0} to {1}".format(
+                getSelectedComboItemStart(),getSelectedComboItemEnd())
 
+        if a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd()):
+            CheapOutput["text"] = a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
+        else:
+            CheapOutput["text"] = "Currently, no routes available from {0} to {1}".format(
+                getSelectedComboItemStart(),getSelectedComboItemEnd())
+
+    print('clicked')
 
 # Main window configuration
 root = Tk()
@@ -45,11 +54,11 @@ root.title('Travel Planner')
 # root.resizable(False, False)
 
 # Select start and end
-StartCity = ttk.Combobox(root, values=a.generatevertexlist(), font=('arial', 12, 'normal'), width=15)
+StartCity = ttk.Combobox(root,  justify='center', values=a.StartGenerateVertexList(), font=('arial', 12, 'normal'), width=15)
 StartCity.grid(column=0, row=0, sticky=tk.W, padx=20, pady=20)
 StartCity.current(0)
 
-EndCity = ttk.Combobox(root, values=a.generatevertexlist(), font=('arial', 12, 'normal'), width=15)
+EndCity = ttk.Combobox(root, justify='center', values=a.EndGenerateVertexList(), font=('arial', 12, 'normal'), width=15)
 EndCity.grid(column=2, row=0, sticky=tk.W, padx=20, pady=20)
 EndCity.current(0)
 
