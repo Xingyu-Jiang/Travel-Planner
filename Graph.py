@@ -169,4 +169,22 @@ class Graph:
             raise Exception("Start and/or end vertex does not exist in the graph")
 
 
+if __name__ == "__main__":
+    routedata = open("routedata.txt", "r")
+    lines = routedata.readlines()
+    routedata.close()
 
+    records = []
+    a = Graph()
+    for line in lines:
+        record = line.split(",")
+        records.append(record)
+
+    for i in records:
+        Cost = int(i[2])
+        Time = int(i[3].replace("\n", ""))
+        From = i[0]
+        To = i[1]
+        a.addEdge(From, To, Time, Cost)
+
+    print(a.CheapestRoute("Bangkok", "Amsterdam"))

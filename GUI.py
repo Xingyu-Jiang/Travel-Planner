@@ -57,7 +57,9 @@ def main():
                                                                         getSelectedComboItemEnd())
                 displayCheap = "\nCheapest Route: \n" + a.CheapestRoute(getSelectedComboItemStart(),
                                                                         getSelectedComboItemEnd())
+
                 T.configure(state='normal')
+                T.delete("1.0", "end")
                 T.insert(INSERT, displayFromTo, "\n")
                 T.insert(END, "\n")
                 T.insert(INSERT, displayQuick, "\n")
