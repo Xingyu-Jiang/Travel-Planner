@@ -133,7 +133,7 @@ class Graph:
                 # Print
                 path = str(QuickestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', ' →')
 
-                return "Total time {0} hours. Total cost {1} dollars. \nRoute: {2}. ".format(
+                return "Total time {0} hours. Total cost {1} dollars. \nRoute: {2} ".format(
                     TotalTime, cost, path)
             else:
                 return False
