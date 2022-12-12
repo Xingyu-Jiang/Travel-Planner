@@ -53,7 +53,7 @@ Macau,New York,323,16
 Macau,San Francisco,382,30
 Macau,Madrid,48,3
 Macau,London,24,3
-Macau,Los Angele,458,13
+Macau,Los Angeles,458,13
 Macau,Amsterdam,95,3
 Istanbul,Dubai,401,5
 Istanbul,New York,397,33
@@ -128,7 +128,7 @@ Madrid,Porto,24,2
 Madrid,Rome,42,3
 Madrid,London,27,3
 Madrid,New York,337,12
-Madrid,Chicaogo,370,20
+Madrid,Chicago,370,20
 Sydney,Los Angeles,747,17
 Sydney,San Francisco,881,34
 Sydney,Singapore,662,18
