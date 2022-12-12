@@ -51,7 +51,7 @@ print('clicked')
 # Main window configuration
 root = Tk()
 root.eval('tk::PlaceWindow . center')
-root.geometry('615x240')
+root.geometry('650x240')
 root.configure(background='#F0F8FF')
 root.title('Travel Planner')
 
@@ -59,11 +59,12 @@ root.title('Travel Planner')
 
 # Select start and end
 StartCity = ttk.Combobox(root, justify='center', values=a.StartGenerateVertexList(), font=('arial', 12, 'normal'),
-                         width=15)
+                         width=17)
 StartCity.grid(column=0, row=0, sticky=tk.W, padx=20, pady=20)
 StartCity.current(0)
 
-EndCity = ttk.Combobox(root, justify='center', values=a.EndGenerateVertexList(), font=('arial', 12, 'normal'), width=15)
+EndCity = ttk.Combobox(root, justify='center', values=a.EndGenerateVertexList(), font=('arial', 12, 'normal'),
+                       width=17)
 EndCity.grid(column=2, row=0, sticky=tk.W, padx=20, pady=20)
 EndCity.current(0)
 
