@@ -8,13 +8,13 @@ class Graph:
     def __contains__(self, item):
         return item in self.Graph.keys()
 
-    def addEdge(self, start, end, dist, cost):  # Set the edges and give weights
+    def addEdge(self, start, end, time, cost):  # Set the edges and give weights
         if start not in self.Graph:  # If the start vertex does not exist in the graph
             self.addVertex(start)  # Adding in the start vertex
         if end not in self.Graph:  # If the end vertex does not exist in the graph
             self.addVertex(end)  # Adding in the end vertex
-        # Set the edge in the format of destination, distance, cost
-        self.Graph[start] = self.Graph[start] + [[end, dist, cost]]
+        # Set the edge in the format of destination, time, cost
+        self.Graph[start] = self.Graph[start] + [[end, time, cost]]
 
     def removeEdge(self, start, end):
         for vertex in self.Graph.keys():  # Check all vertex in the graph
@@ -30,23 +30,34 @@ class Graph:
             print(vertex)
 
     def StartGenerateVertexList(self):
-        list = ['From']
+        StartCB = ['From']
+        Vertices = []
         for vertex in self.Graph.keys():
-            list.append(vertex)
-        return list
+            Vertices.append(vertex)
+        Vertices.sort()
+
+        for vertex in Vertices:
+            StartCB.append(vertex)
+
+        return StartCB
 
     def EndGenerateVertexList(self):
-        list = ['To']
+        EndCB = ['To']
+        Vertices = []
         for vertex in self.Graph.keys():
-            list.append(vertex)
-        return list
+            Vertices.append(vertex)
+        Vertices.sort()
+
+        for vertex in Vertices:
+            EndCB.append(vertex)
+        return EndCB
 
     def viewEdges(self, target):
         for vertex in self.Graph.keys():  # Search for the target vertex
             if vertex == target:
                 for item in self.Graph[vertex]:  # Return all the edge such vertex is connected to
                     print("From", vertex, "to", item[0],
-                          "\nDistance:", item[1], "miles",
+                          "\nTime:", item[1], "hours",
                           "\nCost", item[2], "dollars\n")
 
     def TestPrint(self):
@@ -81,7 +92,7 @@ class Graph:
 
         return paths
 
-    def CalcDistance(self, start, end):
+    def CalcTime(self, start, end):
         if self.__contains__(start) & self.__contains__(end):
             totalCost = 0
             for route in self.Graph[start]:  # Find route
@@ -101,29 +112,29 @@ class Graph:
         else:
             raise Exception("Start and/or vertex does not exist in the graph")
 
-    def ShortestRoute(self, start, end):
+    def QuickestRoute(self, start, end):
         if self.__contains__(start) & self.__contains__(end):
-            # Find path with the shortest distance
+            # Find path with the Quickest amount of time
             allPaths = self.find_all_paths(start, end)
             res = []
             for path in allPaths:
-                pathDistance = 0
+                pathTime = 0
                 for i in range(len(path) - 1):
-                    pathDistance = pathDistance + self.CalcDistance(path[i], path[i + 1])
-                res.append(pathDistance)
+                    pathTime = pathTime + self.CalcTime(path[i], path[i + 1])
+                res.append(pathTime)
 
             if len(res) != 0:
-                TotalDistance = min(res)
-                ShortestRoutePath = allPaths[res.index(TotalDistance)]
+                TotalTime = min(res)
+                QuickestRoutePath = allPaths[res.index(TotalTime)]
                 # Cost
                 cost = 0
-                for i in range(len(ShortestRoutePath) - 1):
-                    cost = cost + self.routeCost(ShortestRoutePath[i], ShortestRoutePath[i + 1])
+                for i in range(len(QuickestRoutePath) - 1):
+                    cost = cost + self.routeCost(QuickestRoutePath[i], QuickestRoutePath[i + 1])
                 # Print
-                path = str(ShortestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', '→')
+                path = str(QuickestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', ' →')
 
-                return " Total distance {0} miles. Total cost {1} dollars. \nRoute: {2}. ".format(
-                    TotalDistance, cost, path)
+                return "Total time {0} hours. Total cost {1} dollars. \nRoute: {2}. ".format(
+                    TotalTime, cost, path)
             else:
                 return False
         else:
@@ -143,40 +154,19 @@ class Graph:
             if len(res) != 0:
                 TotalCost = min(res)
                 CheapestRoutePath = allPaths[res.index(TotalCost)]
-                # Distance
-                TotalDistance = 0
+                # Time
+                TotalTime = 0
                 for i in range(len(CheapestRoutePath) - 1):
-                    TotalDistance = TotalDistance + self.CalcDistance(CheapestRoutePath[i], CheapestRoutePath[i + 1])
+                    TotalTime = TotalTime + self.CalcTime(CheapestRoutePath[i], CheapestRoutePath[i + 1])
                 # Print
-                path = str(CheapestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', '→')
+                path = str(CheapestRoutePath).replace('[', '').replace(']', '').replace("'", '').replace(',', ' →')
 
-                return " Total distance {1} miles. Total cost {0} dollars. \nRoute: {2}".format(
-                    TotalCost, TotalDistance, path)
+                return "Total time {1} hours. Total cost {0} dollars. \nRoute: {2}".format(
+                    TotalCost, TotalTime, path)
             else:
                 return False
         else:
             raise Exception("Start and/or end vertex does not exist in the graph")
 
-
-if __name__ == "__main__":
-    a = Graph()
-    a.addVertex("China")
-    a.addVertex("Russia")
-    a.addVertex("US")
-    a.addVertex("NoWhere")
-    a.addEdge("China", "US", 2000, 400)
-    a.addEdge("China", "Italy", 800, 80)
-    a.addEdge("US", "Russia", 800, 80)
-    a.addEdge("US", "Japan", 10, 10)
-    a.addEdge("Germany", "China", 100, 1000)
-    a.addEdge("Japan", "Russia", 100, 250)
-    a.addEdge("Japan", "Canada", 1000, 200)
-
-    # print(a.ShortestRoute("US", "Italy"))
-
-    # print(a.find_all_paths("US", "Canada"))
-    print(a.find_path("Germany", "China"))
-    print(a.find_path("Germany", "NoWhere"))
-    print(a.find_path("US", "Japan"))
 
 
