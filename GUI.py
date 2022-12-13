@@ -73,6 +73,7 @@ def main():
                 Text = "Currently, no routes available from {0} to {1}".format(
                     getSelectedComboItemStart(), getSelectedComboItemEnd())
                 T.configure(state='normal')
+                T.delete("1.0", "end")
                 T.insert(INSERT, Text)
                 T.insert(INSERT, "\n")
                 T.configure(state='disabled')
@@ -84,7 +85,7 @@ def main():
     # Main window configuration
     root = Tk()
     # root.eval('tk::PlaceWindow . center')
-    root.geometry('1000x500')
+    root.geometry('1000x600')
     root.configure(background='#F0F8FF')
     root.title('Travel Planner')
 
@@ -107,22 +108,22 @@ def main():
     arrowLabel.place(x=330, y=10)
 
     # create map widget
-    map_widget = tkintermapview.TkinterMapView(root, width=400, height=400, corner_radius=1)
-    map_widget.place(x=510, y=60)
+    map_widget = tkintermapview.TkinterMapView(root, width=842, height=300, corner_radius=1)
+    map_widget.place(x=80, y=270)
 
     map_widget.set_position(40.11527480314763, -75.11050323951898)  # Penn State Abington
     map_widget.set_zoom(2)
 
     # Text Box
-    T = Text(root, width=46, height=22, font=('arial', 12, 'normal'))
+    T = Text(root, width=93, height=10, font=('arial', 12, 'normal'))
     T.place(x=80, y=60)
 
     # Search button
     Search = Button(root, text='Search Route', bg='#F0F8FF', font=('arial', 12, 'normal'), command=btnClickFunction)
-    Search.place(x=700, y=20)
+    Search.place(x=730, y=20)
 
     b = Button(root, text='Reset', bg='#F0F8FF', font=('arial', 12, 'normal'), command=restart_program)
-    b.place(x=860, y=20)
+    b.place(x=865, y=20)
 
     root.mainloop()
 
