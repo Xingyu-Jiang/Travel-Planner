@@ -1,6 +1,5 @@
 from tkinter import ttk
 from tkinter import *
-
 import Graph as G
 import tkintermapview
 from geopy import Nominatim
