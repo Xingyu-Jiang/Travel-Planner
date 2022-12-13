@@ -13,7 +13,7 @@ from geopy import Nominatim
 
 # Graph
 
-@@ -22,6 +30,7 @@
+
 
 routedata.close()
 
@@ -21,45 +21,45 @@ routedata.close()
 # this is a function which returns the selected combo box item
 def getSelectedComboItemStart():
     return StartCity.get()
-@@ -39,6 +48,37 @@ def btnClickFunction():
-            QuickestOutput["text"] = a.QuickestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
-            CheapOutput["text"] = a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
+def btnClickFunction():
+        QuickestOutput["text"] = a.QuickestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
+        CheapOutput["text"] = a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
 
-            # create a connect path from start to end in the map
-            startLocation = geolocator.geocode(getSelectedComboItemStart())
-            endLocation = geolocator.geocode(getSelectedComboItemEnd())
+        # create a connect path from start to end in the map
+        startLocation = geolocator.geocode(getSelectedComboItemStart())
+        endLocation = geolocator.geocode(getSelectedComboItemEnd())
 
-            marker_1 = map_widget.set_marker(startLocation.latitude, startLocation.longitude,
-                                             text=getSelectedComboItemStart())
+        marker_1 = map_widget.set_marker(startLocation.latitude, startLocation.longitude,
+                                         text=getSelectedComboItemStart())
 
-            marker_2 = map_widget.set_marker(endLocation.latitude, endLocation.longitude,
-                                             text=getSelectedComboItemEnd())
+        marker_2 = map_widget.set_marker(endLocation.latitude, endLocation.longitude,
+                                         text=getSelectedComboItemEnd())
 
-            path_1 = map_widget.set_path(
-                [marker_1.position, marker_2.position, (startLocation.latitude, startLocation.longitude),
-                 (endLocation.latitude, endLocation.longitude)])
+        path_1 = map_widget.set_path(
+            [marker_1.position, marker_2.position, (startLocation.latitude, startLocation.longitude),
+             (endLocation.latitude, endLocation.longitude)])
 
-            displayFromTo = getSelectedComboItemStart()+" "+"to"+" "+getSelectedComboItemEnd()+":"
-            displayQuick = "Quickest Route: "+a.QuickestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
-            displayCheap = "Cheapest Route: "+a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
-            next = "\n"
-            T.configure(state='normal')
-            T.insert(INSERT, displayFromTo)
-            T.insert(END,next)
-            T.insert(INSERT,displayQuick)
-            T.insert(END, next)
-            T.insert(INSERT,displayCheap)
-            T.insert(END, next)
-            T.insert(INSERT,next)
-            T.configure(state='disabled')
-
-
+        displayFromTo = getSelectedComboItemStart()+" "+"to"+" "+getSelectedComboItemEnd()+":"
+        displayQuick = "Quickest Route: "+a.QuickestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
+        displayCheap = "Cheapest Route: "+a.CheapestRoute(getSelectedComboItemStart(), getSelectedComboItemEnd())
+        next = "\n"
+        T.configure(state='normal')
+        T.insert(INSERT, displayFromTo)
+        T.insert(END,next)
+        T.insert(INSERT,displayQuick)
+        T.insert(END, next)
+        T.insert(INSERT,displayCheap)
+        T.insert(END, next)
+        T.insert(INSERT,next)
+        T.configure(state='disabled')
 
 
-        else:
-            QuickestOutput["text"] = "Currently, no routes available from {0} to {1}".format(
-                getSelectedComboItemStart(), getSelectedComboItemEnd())
-@@ -51,40 +91,226 @@ def btnClickFunction():
+
+
+    else:
+        QuickestOutput["text"] = "Currently, no routes available from {0} to {1}".format(
+            getSelectedComboItemStart(), getSelectedComboItemEnd())
+def btnClickFunction():
 # Main window configuration
 root = Tk()
 root.eval('tk::PlaceWindow . center')
